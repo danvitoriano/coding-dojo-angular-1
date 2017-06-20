@@ -9,25 +9,25 @@
         <script type="text/javascript" src="js/lib/angular.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/controllers/FotosController.js"></script>
+        <script type="text/javascript" src="js/directives/minhas-diretivas.js"></script>
     </head>
     <body>
         <div class="container" ng-controller="FotosController">
             <div class="jumbotron">
                 <h1 class="text-center">Alurapic</h1>    
             </div>
-            <div class="row" ng-repeat="foto in fotos">
-                <div class="panel panel-default col-md-2">
-                     
+            <div class="row">
+                <div class="col-md-12">
+                <form>
+                     <input class="form-control" placeholder="filtrar pelo título da foto" ng-model="filtro" ng-model-options="{debounce: 500}">
+                </form>
+                </div> <!-- fim col-md-12 -->
+            </div>
+            <div class="row">
+                <meu-painel ng-repeat="foto in fotos | filter : filtro" titulo="{{foto.titulo}}">
+                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
 
-                    <div class="panel-heading">
-                        <h3 class="panel-title text-center">
-                            {{foto.titulo}}
-                        </h3>
-                    </div>  
-                    <div class="panel-body">
-                        <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}"> 
-                    </div>
-                </div>    
+                </meu-painel>
             </div>
         </div> <!-- fim container -->        
     </body>
